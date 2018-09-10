@@ -1,0 +1,32 @@
+project: dino-tree
+desc: The orgchart service of DinoPark
+env:
+  name: dino-tree
+tasks:
+  package:
+    cmd: |
+      if [ ! -f profile.json ]; then
+        curl -O https://gist.githubusercontent.com/fiji-flo/9ce396f27ca705e14e64805df06c7561/raw/48e35022b65def6f1a56f60cc3942c0083c656ff/profiles.json
+      fi
+      docker build -t {{ .name }} .
+  
+  run-docker:
+    cmd: docker run --rm -ti --name {{ .name }} {{ .name }}
+
+  run-k8s:
+    cmd: kubectl apply -f k8s/chart/
+
+  run-local:
+    cmd: cargo +nightly run --release
+  
+  test:
+    cmd: cargo +nightly test
+  
+  test-all:
+    cmd: $myke test _clippy _fmt
+
+  _clippy:
+    cmd: cargo +nightly clippy
+  
+  _fmt:
+    cmd: cargo +nightly fmt --all -- --check
