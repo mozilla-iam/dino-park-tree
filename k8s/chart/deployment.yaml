@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dino-tree-deployment
+  namespace: dino-park
+  labels:
+    app: dino-tree
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dino-tree
+  template:
+    metadata:
+      labels:
+        app: dino-tree
+    spec:
+      containers:
+        - name: dino-tree
+          image: mozillaparsys/dino-tree:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8888
