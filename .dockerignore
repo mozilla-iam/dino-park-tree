@@ -3,3 +3,4 @@ target/
 .dockerignore
 Dockerfile
 myke.yml
+k8s/

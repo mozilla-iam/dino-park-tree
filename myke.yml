@@ -2,16 +2,17 @@ project: dino-tree
 desc: The orgchart service of DinoPark
 env:
   name: dino-tree
+  image: mozillaparsys/dino-tree
 tasks:
   package:
     cmd: |
-      if [ ! -f profile.json ]; then
+      if [ ! -f profiles.json ]; then
         curl -O https://gist.githubusercontent.com/fiji-flo/9ce396f27ca705e14e64805df06c7561/raw/48e35022b65def6f1a56f60cc3942c0083c656ff/profiles.json
       fi
-      docker build -t {{ .name }} .
+      docker build -t {{ .image }} .
   
   run-docker:
-    cmd: docker run --rm -ti --name {{ .name }} {{ .name }}
+    cmd: docker run --rm -ti --name {{ .name }} {{ .image }}
 
   run-k8s:
     cmd: kubectl apply -f k8s/chart/
