@@ -1,6 +1,8 @@
 #![feature(rust_2018_preview)]
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
+#![feature(tool_lints)]
+#![cfg_attr(feature = "cargo-clippy", deny(clippy::all))]
 extern crate rocket;
 #[macro_use]
 extern crate rocket_contrib;

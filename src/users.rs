@@ -7,6 +7,7 @@ use rocket_contrib::Json;
 use crate::dino_tree::DinoTree;
 
 #[get("/")]
+#[allow(clippy::needless_pass_by_value)]
 pub fn users(forrest: State<Mutex<DinoTree>>) -> Result<Json, NotFound<Json>> {
     forrest
         .lock()

@@ -8,6 +8,7 @@ use crate::dino::Dino;
 use crate::dino_tree::DinoTree;
 
 #[post("/", format = "application/json", data = "<msg>")]
+#[allow(clippy::needless_pass_by_value)]
 pub fn cis_update(msg: Json, forrest: State<RwLock<DinoTree>>) -> Result<Json, BadRequest<Json>> {
     let profile_update = msg.into_inner();
     let dino = Dino::from(&profile_update)

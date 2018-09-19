@@ -7,6 +7,7 @@ use rocket_contrib::Json;
 use crate::dino_tree::DinoTree;
 
 #[get("/<user_id>")]
+#[allow(clippy::needless_pass_by_value)]
 pub fn related(user_id: String, forrest: State<RwLock<DinoTree>>) -> Result<Json, NotFound<Json>> {
     forrest
         .read()
@@ -23,6 +24,7 @@ pub fn related(user_id: String, forrest: State<RwLock<DinoTree>>) -> Result<Json
 }
 
 #[get("/")]
+#[allow(clippy::needless_pass_by_value)]
 pub fn orgchart(forrest: State<RwLock<DinoTree>>) -> Result<Json, NotFound<Json>> {
     forrest
         .read()

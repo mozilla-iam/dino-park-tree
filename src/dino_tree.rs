@@ -102,7 +102,7 @@ impl DinoTree {
             self.full = full;
             Ok(())
         } else {
-            Err(format!("Failed updating user"))
+            Err(format!("Failed updating user {}", dino.user_id))
         }
     }
 
