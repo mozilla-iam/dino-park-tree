@@ -23,6 +23,7 @@ impl Dino {
 }
 
 fn slim_down_profile(v: &Value) -> Value {
+    let user_id = get_user_id(v).unwrap_or_default();
     let first_name = v
         .as_object()
         .and_then(|o| o.get("first_name"))
@@ -57,6 +58,7 @@ fn slim_down_profile(v: &Value) -> Value {
         .map(String::from)
         .unwrap_or_default();
     json!({
+        "user_id": user_id,
         "first_name": first_name,
         "last_name": last_name,
         "picture": picture,
@@ -96,7 +98,7 @@ mod test {
     use super::*;
     use serde_json;
 
-    const PROFILE_JSON_SLIM: &'static str = r#"
+    const PROFILE_JSON_SLIM: &str = r#"
 {
     "schema": "https://person-api.sso.mozilla.com/schema/v2/profile",
     "user_id": {
