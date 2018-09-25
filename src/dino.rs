@@ -57,6 +57,12 @@ fn slim_down_profile(v: &Value) -> Value {
         .and_then(|o| o.as_str())
         .map(String::from)
         .unwrap_or_default();
+    let location = v
+        .as_object()
+        .and_then(|o| o.get("location_preference"))
+        .and_then(|o| o.get("value"))
+        .cloned()
+        .unwrap_or_default();
     json!({
         "user_id": user_id,
         "first_name": first_name,
@@ -64,6 +70,7 @@ fn slim_down_profile(v: &Value) -> Value {
         "picture": picture,
         "title": title,
         "fun_title": fun_title,
+        "location": location,
     })
 }
 
@@ -127,6 +134,9 @@ mod test {
     },
     "picture": {
         "value": "https://placeholdit.imgix.net/~text?txtsize=55&txt=349x521&w=349&h=521"
+    },
+    "location_preference": {
+        "value": "Berlin"
     }
 }"#;
 
@@ -139,5 +149,12 @@ mod test {
         assert_eq!(d.user_id, "email|cwjVGDBxbgoyZSVcCUsMXavl");
         assert_eq!(d.employee_id, 3932u64);
         assert_eq!(d.manager_id, Some(4706u64));
+        assert_eq!(
+            d.data
+                .as_object()
+                .and_then(|d| d.get("location"))
+                .and_then(|s| s.as_str()),
+            Some("Berlin")
+        );
     }
 }
