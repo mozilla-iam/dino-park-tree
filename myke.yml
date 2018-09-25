@@ -23,8 +23,11 @@ tasks:
   test:
     cmd: cargo +nightly test
   
+  _test-verbose:
+    cmd: cargo +nightly test --verbose --all
+
   test-all:
-    cmd: $myke test _clippy _fmt
+    cmd: $myke _fmt _clippy _test-verbose
 
   _clippy:
     cmd: cargo +nightly clippy
