@@ -1,5 +1,5 @@
 profiles.json
-node_modules
+node_modules/
 package-lock.json
 .vscode
 .nyc_output/

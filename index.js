@@ -8,7 +8,7 @@ async function main() {
     const cfg = load(process.env["CONFIG_FILE"]);
 
     app = new App(cfg);
-
+    await app.init(cfg);
     logger.info(`starting to serve on port: ${cfg.port}`);
     app.run();
   } catch (e) {
