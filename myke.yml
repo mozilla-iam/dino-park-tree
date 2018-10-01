@@ -5,11 +5,7 @@ env:
   image: mozillaparsys/dino-tree
 tasks:
   package:
-    cmd: |
-      if [ ! -f profiles.json ]; then
-        curl -O https://gist.githubusercontent.com/fiji-flo/9ce396f27ca705e14e64805df06c7561/raw/48e35022b65def6f1a56f60cc3942c0083c656ff/profiles.json
-      fi
-      docker build -t {{ .image }} .
+    cmd: docker build -t {{ .image }} .
   
   run-docker:
     cmd: docker run --rm -ti --name {{ .name }} {{ .image }}
@@ -18,19 +14,19 @@ tasks:
     cmd: kubectl apply -f k8s/chart/
 
   run-local:
-    cmd: cargo +nightly run --release
+    cmd: npm run dev
   
   test:
-    cmd: cargo +nightly test
+    cmd: npm run test
   
-  _test-verbose:
-    cmd: cargo +nightly test --verbose --all
-
   test-all:
-    cmd: $myke _fmt _clippy _test-verbose
+    cmd: $myke setup _lint test _coverage
 
-  _clippy:
-    cmd: cargo +nightly clippy
+  _lint:
+    cmd: npm run pretest
   
-  _fmt:
-    cmd: cargo +nightly fmt --all -- --check
+  _coverage:
+    cmd: npm run coverage
+  
+  setup:
+    cmd: npm install 

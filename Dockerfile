@@ -1,10 +1,8 @@
-FROM rustlang/rust:nightly-slim
-WORKDIR /dino-tree
-COPY . /dino-tree
-RUN cargo build --release
+FROM node
 
-FROM debian:9-slim
-WORKDIR /dino-tree
-COPY --from=0  /dino-tree/target/release/dino-tree .
-COPY profiles.json /tmp/
-CMD ["./dino-tree"]  
+WORKDIR /app
+
+COPY package.json .
+RUN npm install --production
+COPY . /app
+CMD ["node", "-r", "esm", "index.js"]
