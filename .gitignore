@@ -10,3 +10,8 @@ Cargo.lock
 **/*.rs.bk
 
 profiles.json
+
+node_modules
+package-lock.json
+.vscode
+.nyc_output/
