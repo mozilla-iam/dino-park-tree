@@ -3,25 +3,32 @@ import EventEmitter from "events";
 import "mocha";
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
-import sinon from "sinon";
 import { createRequest, createResponse } from "node-mocks-http";
 
 chai.use(chaiAsPromised);
 chai.should();
 
-function DinoTreeMock(error) {
-  return {
-    related: () => (error && { error }) || {},
-    expanded: () => (error && { error }) || {},
-    directs: () => (error && { error }) || {},
-    fullOrgchart: () => {
-      return { all: "all" };
-    }
-  };
+class DinoTreeMock {
+  constructor(error) {
+    this.error = error;
+  }
+  _error() {
+    return (this.error && { error: this.error }) || {};
+  }
+  related() {
+    return this._error();
+  }
+  expanded() {
+    return this._error();
+  }
+  directs() {
+    return this._error();
+  }
+  fullOrgchart() {
+    return { all: "all" };
+  }
 }
 
-import * as dinos from "../lib/dinos";
-sinon.stub(dinos, "DinoTree").callsFake(DinoTreeMock);
 import Orgchart from "../lib/orgchart";
 
 describe("Express handlers", () => {
@@ -45,7 +52,7 @@ describe("Express handlers", () => {
           getDinos: () => error
         };
         const orgchart = new Orgchart(storage);
-        await orgchart.init();
+        await orgchart.init(DinoTreeMock);
         const handle = orgchart[handler]();
         const req = createRequest({ method: "GET", params });
         const res = createResponse({
@@ -71,7 +78,7 @@ describe("Express handlers", () => {
         getDinos: () => error
       };
       const orgchart = new Orgchart(storage);
-      await orgchart.init();
+      await orgchart.init(DinoTreeMock);
       const handle = orgchart.createFullOrgchartHandler();
       const req = createRequest({ method: "GET" });
       const res = createResponse({
