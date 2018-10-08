@@ -8,7 +8,7 @@ chai.use(chaiAsPromised);
 chai.should();
 
 import { TEST_CONFIG } from "./configs";
-import { generateProfile } from "./helpers";
+import { generateProfile, generateProfiles } from "./helpers";
 import Storage from "../lib/storage";
 
 function makeHits(num) {
@@ -47,6 +47,8 @@ function makeEs(how) {
       };
     }
     async delete() {}
+    async index() {}
+    async bulk() {}
   }
   return Es;
 }
@@ -83,6 +85,14 @@ describe("constructor", () => {
     const es = makeEs({ refresh: Promise.resolve(true) });
     const storage = new Storage(TEST_CONFIG, es);
     const dinos = await storage.update(profile);
+    dinos.should.be.true;
+  });
+
+  it("bulk", async () => {
+    const profiles = generateProfiles([[1, 0], [2, 1]]);
+    const es = makeEs({ refresh: Promise.resolve(true) });
+    const storage = new Storage(TEST_CONFIG, es);
+    const dinos = await storage.bulkInsert(profiles);
     dinos.should.be.true;
   });
 });
