@@ -51,7 +51,7 @@ describe("Express handlers", () => {
         const storage = {
           getDinos: () => error
         };
-        const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+        const orgchart = await new Orgchart(storage, DinoTreeMock).init();
         const handle = orgchart[handler]();
         const req = createRequest({ method: "GET", params });
         const res = createResponse({
@@ -76,7 +76,7 @@ describe("Express handlers", () => {
       const storage = {
         getDinos: () => error
       };
-      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createFullOrgchartHandler();
       const req = createRequest({ method: "GET" });
       const res = createResponse({
@@ -110,7 +110,7 @@ describe("Express handlers", () => {
           return DinoTreeMock;
         }
       };
-      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createBulkHandler();
       const req = createRequest({ method: "POST", files });
       const res = createResponse({
@@ -145,7 +145,7 @@ describe("Express handlers", () => {
           return Promise.reject("FAIL");
         }
       };
-      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createBulkHandler();
       const req = createRequest({ method: "POST", files });
       const res = createResponse({
@@ -177,7 +177,7 @@ describe("Express handlers", () => {
           return DinoTreeMock;
         }
       };
-      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createUpdateHandler();
       const req = createRequest({ method: "POST", body });
       const res = createResponse({
@@ -208,7 +208,7 @@ describe("Express handlers", () => {
           return Promise.reject("FAIL");
         }
       };
-      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createUpdateHandler();
       const req = createRequest({ method: "POST", body });
       const res = createResponse({
@@ -239,7 +239,7 @@ describe("Express handlers", () => {
           return DinoTreeMock;
         }
       };
-      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createDeleteHandler();
       const req = createRequest({
         method: "POST",
@@ -272,7 +272,7 @@ describe("Express handlers", () => {
           return Promise.reject("FAIL");
         }
       };
-      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createDeleteHandler();
       const req = createRequest({
         method: "POST",
