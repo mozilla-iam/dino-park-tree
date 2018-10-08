@@ -51,8 +51,7 @@ describe("Express handlers", () => {
         const storage = {
           getDinos: () => error
         };
-        const orgchart = new Orgchart(storage);
-        await orgchart.init(DinoTreeMock);
+        const orgchart = await new Orgchart(storage).init(DinoTreeMock);
         const handle = orgchart[handler]();
         const req = createRequest({ method: "GET", params });
         const res = createResponse({
@@ -77,8 +76,7 @@ describe("Express handlers", () => {
       const storage = {
         getDinos: () => error
       };
-      const orgchart = new Orgchart(storage);
-      await orgchart.init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage).init(DinoTreeMock);
       const handle = orgchart.createFullOrgchartHandler();
       const req = createRequest({ method: "GET" });
       const res = createResponse({
