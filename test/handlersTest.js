@@ -51,8 +51,7 @@ describe("Express handlers", () => {
         const storage = {
           getDinos: () => error
         };
-        const orgchart = new Orgchart(storage);
-        await orgchart.init(DinoTreeMock);
+        const orgchart = await new Orgchart(storage, DinoTreeMock).init();
         const handle = orgchart[handler]();
         const req = createRequest({ method: "GET", params });
         const res = createResponse({
@@ -73,12 +72,11 @@ describe("Express handlers", () => {
       });
     }
 
-    it("createFullOrgchart", async () => {
+    it("createFullOrgchartHandler", async () => {
       const storage = {
         getDinos: () => error
       };
-      const orgchart = new Orgchart(storage);
-      await orgchart.init(DinoTreeMock);
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createFullOrgchartHandler();
       const req = createRequest({ method: "GET" });
       const res = createResponse({
@@ -90,6 +88,207 @@ describe("Express handlers", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(200);
           JSON.parse(res._getData()).should.be.deep.equal({ all: "all" });
+          resolve();
+        });
+      });
+
+      handle(req, res);
+
+      return result;
+    });
+
+    it("createBulkHandler", async () => {
+      const files = {
+        data: {
+          data: "[]"
+        }
+      };
+      const storage = {
+        getDinos: () => error,
+        bulkInsert: async profiles => {
+          profiles.length.should.be.equal(0);
+          return DinoTreeMock;
+        }
+      };
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
+      const handle = orgchart.createBulkHandler();
+      const req = createRequest({ method: "POST", files });
+      const res = createResponse({
+        eventEmitter: EventEmitter
+      });
+
+      const result = new Promise(resolve => {
+        res.on("end", () => {
+          res._isEndCalled().should.be.true;
+          res.statusCode.should.be.equal(200);
+          JSON.parse(res._getData()).should.be.deep.equal({
+            status: "updated"
+          });
+          resolve();
+        });
+      });
+
+      handle(req, res);
+
+      return result;
+    });
+
+    it("createBulkHandler fails", async () => {
+      const files = {
+        data: {
+          data: "[]"
+        }
+      };
+      const storage = {
+        getDinos: () => error,
+        bulkInsert: async () => {
+          return Promise.reject("FAIL");
+        }
+      };
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
+      const handle = orgchart.createBulkHandler();
+      const req = createRequest({ method: "POST", files });
+      const res = createResponse({
+        eventEmitter: EventEmitter
+      });
+
+      const result = new Promise(resolve => {
+        res.on("end", () => {
+          res._isEndCalled().should.be.true;
+          res.statusCode.should.be.equal(503);
+          JSON.parse(res._getData()).should.be.deep.equal({
+            error: "FAIL"
+          });
+          resolve();
+        });
+      });
+
+      handle(req, res);
+
+      return result;
+    });
+
+    it("createUpdateHandler", async () => {
+      const body = {};
+      const storage = {
+        getDinos: () => error,
+        update: async profile => {
+          profile.should.be.deep.equal({});
+          return DinoTreeMock;
+        }
+      };
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
+      const handle = orgchart.createUpdateHandler();
+      const req = createRequest({ method: "POST", body });
+      const res = createResponse({
+        eventEmitter: EventEmitter
+      });
+
+      const result = new Promise(resolve => {
+        res.on("end", () => {
+          res._isEndCalled().should.be.true;
+          res.statusCode.should.be.equal(200);
+          JSON.parse(res._getData()).should.be.deep.equal({
+            status: "updated"
+          });
+          resolve();
+        });
+      });
+
+      handle(req, res);
+
+      return result;
+    });
+
+    it("createUpdateHandler fails", async () => {
+      const body = {};
+      const storage = {
+        getDinos: () => error,
+        update: async () => {
+          return Promise.reject("FAIL");
+        }
+      };
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
+      const handle = orgchart.createUpdateHandler();
+      const req = createRequest({ method: "POST", body });
+      const res = createResponse({
+        eventEmitter: EventEmitter
+      });
+
+      const result = new Promise(resolve => {
+        res.on("end", () => {
+          res._isEndCalled().should.be.true;
+          res.statusCode.should.be.equal(503);
+          JSON.parse(res._getData()).should.be.deep.equal({
+            error: "FAIL"
+          });
+          resolve();
+        });
+      });
+
+      handle(req, res);
+
+      return result;
+    });
+
+    it("createDeleteHandler", async () => {
+      const storage = {
+        getDinos: () => error,
+        deleteDino: async userId => {
+          userId.should.be.equal("user1");
+          return DinoTreeMock;
+        }
+      };
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
+      const handle = orgchart.createDeleteHandler();
+      const req = createRequest({
+        method: "POST",
+        params: { userId: "user1" }
+      });
+      const res = createResponse({
+        eventEmitter: EventEmitter
+      });
+
+      const result = new Promise(resolve => {
+        res.on("end", () => {
+          res._isEndCalled().should.be.true;
+          res.statusCode.should.be.equal(200);
+          JSON.parse(res._getData()).should.be.deep.equal({
+            status: "deleted"
+          });
+          resolve();
+        });
+      });
+
+      handle(req, res);
+
+      return result;
+    });
+
+    it("createDeleteHandler fails", async () => {
+      const storage = {
+        getDinos: () => error,
+        deleteDino: async () => {
+          return Promise.reject("FAIL");
+        }
+      };
+      const orgchart = await new Orgchart(storage, DinoTreeMock).init();
+      const handle = orgchart.createDeleteHandler();
+      const req = createRequest({
+        method: "POST",
+        params: { userId: "user1" }
+      });
+      const res = createResponse({
+        eventEmitter: EventEmitter
+      });
+
+      const result = new Promise(resolve => {
+        res.on("end", () => {
+          res._isEndCalled().should.be.true;
+          res.statusCode.should.be.equal(503);
+          JSON.parse(res._getData()).should.be.deep.equal({
+            error: "FAIL"
+          });
           resolve();
         });
       });
