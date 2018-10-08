@@ -76,7 +76,7 @@ describe("constructor", () => {
   it("delete calls refresh", async () => {
     const es = makeEs({ refresh: Promise.resolve(true) });
     const storage = new Storage(TEST_CONFIG, es);
-    const dinos = await storage.deleteUser();
+    const dinos = await storage.deleteDino();
     dinos.should.be.true;
   });
 
