@@ -6,12 +6,12 @@ function generateProfile(id, manager_id) {
     picture: { value: "url…" },
     fun_title: { value: `Funny ${id}` },
     location_preference: { value: `city ${id}` },
+    business_title: `Employee Nr: ${id}`,
     access_information: {
       hris: {
         values: {
-          employee_id: id,
-          workers_managers_employee_id: manager_id,
-          business_title: `Employee Nr: ${id}`
+          EmployeeID: id,
+          WorkersManagersEmployeeID: manager_id
         }
       }
     }
