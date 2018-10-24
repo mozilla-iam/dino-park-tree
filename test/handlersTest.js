@@ -47,6 +47,7 @@ describe("Express handlers", () => {
       ["createRelatedHandler", params, , 200],
       ["createExpandedHandler", params, , 200],
       ["createDirectsHandler", params, , 200],
+      ["createTraceHandler", params, , 200],
       ["createFullOrgchartHandler", , , 200]
     ];
 
