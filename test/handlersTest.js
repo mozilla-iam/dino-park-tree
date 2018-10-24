@@ -27,6 +27,9 @@ class DinoTreeMock {
   fullOrgchart() {
     return { all: "all" };
   }
+  trace() {
+    return this._error();
+  }
 }
 
 import Orgchart from "../lib/orgchart";
@@ -38,6 +41,7 @@ describe("Express handlers", () => {
     const handlers = [
       ["createRelatedHandler", params, error, 404],
       ["createExpandedHandler", params, error, 404],
+      ["createTraceHandler", params, error, 404],
       ["createDirectsHandler", params, error, 404],
       ["createFullOrgchartHandler", , error, 200],
       ["createRelatedHandler", params, , 200],

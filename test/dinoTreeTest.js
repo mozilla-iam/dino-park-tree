@@ -51,6 +51,16 @@ describe("DinoTree", () => {
     noDirects.length.should.be.equal(0);
   });
 
+  it("trace", () => {
+    const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
+    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinoTree = new DinoTree(dinos);
+    const traced = dinoTree.trace("user3");
+    console.log(JSON.stringify(traced));
+    traced.trace.should.exist;
+    traced.trace.should.be.equal("0-0");
+  });
+
   it("related", () => {
     const h = [[1, 0], [2, 1], [4, 2], [3, 2]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
