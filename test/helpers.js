@@ -1,12 +1,13 @@
 function generateProfile(id, manager_id) {
+  const metadata = { visibility: "staff" };
   return {
-    user_id: { value: `user${id}` },
-    first_name: { value: `person ${id}` },
-    last_name: { value: `mc ${id}` },
-    picture: { value: "url…" },
-    fun_title: { value: `Funny ${id}` },
-    location_preference: { value: `city ${id}` },
-    business_title: `Employee Nr: ${id}`,
+    user_id: { value: `user${id}`, metadata },
+    first_name: { value: `person ${id}`, metadata },
+    last_name: { value: `mc ${id}`, metadata },
+    picture: { value: "url…", metadata },
+    fun_title: { value: `Funny ${id}`, metadata },
+    location_preference: { value: `city ${id}`, metadata },
+    business_title: { value: `Employee Nr: ${id}`, metadata },
     access_information: {
       hris: {
         values: {
