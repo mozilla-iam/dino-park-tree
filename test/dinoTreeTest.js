@@ -55,7 +55,7 @@ describe("DinoTree", () => {
     const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
-    const traced = dinoTree.trace("dino3");
+    const traced = dinoTree.trace("username3");
     console.log(JSON.stringify(traced));
     traced.trace.should.exist;
     traced.trace.should.be.equal("0-0");
