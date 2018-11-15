@@ -36,7 +36,7 @@ import Orgchart from "../lib/orgchart";
 
 describe("Express handlers", () => {
   describe("Basic endpoints", () => {
-    const params = { userId: "id" };
+    const params = { dinoId: "id" };
     const error = "error";
     const handlers = [
       ["createRelatedHandler", params, error, 404],
@@ -239,8 +239,8 @@ describe("Express handlers", () => {
     it("createDeleteHandler", async () => {
       const storage = {
         getDinos: () => error,
-        deleteDino: async userId => {
-          userId.should.be.equal("user1");
+        deleteDino: async dinoId => {
+          dinoId.should.be.equal("dino1");
           return DinoTreeMock;
         }
       };
@@ -248,7 +248,7 @@ describe("Express handlers", () => {
       const handle = orgchart.createDeleteHandler();
       const req = createRequest({
         method: "POST",
-        params: { userId: "user1" }
+        params: { dinoId: "dino1" }
       });
       const res = createResponse({
         eventEmitter: EventEmitter
@@ -281,7 +281,7 @@ describe("Express handlers", () => {
       const handle = orgchart.createDeleteHandler();
       const req = createRequest({
         method: "POST",
-        params: { userId: "user1" }
+        params: { dinoId: "dino1" }
       });
       const res = createResponse({
         eventEmitter: EventEmitter

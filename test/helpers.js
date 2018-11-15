@@ -2,12 +2,18 @@ function generateProfile(id, manager_id) {
   const metadata = { visibility: "staff" };
   return {
     user_id: { value: `user${id}`, metadata },
+    usernames: { values: { mozilliansorg: `username${id}` }, metadata },
+    identities: { dinopark_id: { value: `dino${id}`, metadata } },
     first_name: { value: `person ${id}`, metadata },
     last_name: { value: `mc ${id}`, metadata },
     picture: { value: "url…", metadata },
     fun_title: { value: `Funny ${id}`, metadata },
-    location_preference: { value: `city ${id}`, metadata },
-    business_title: { value: `Employee Nr: ${id}`, metadata },
+    location: { value: `city ${id}`, metadata },
+    staff_information: {
+      staff: { value: true, metadata },
+      title: { value: `Employee Nr: ${id}`, metadata },
+      office_location: { value: `office: ${id}`, metadata }
+    },
     access_information: {
       hris: {
         values: {
@@ -34,7 +40,7 @@ function checkHierarchy(tree, slim) {
     return false;
   }
   for (let i = 0; i < tree.length; i++) {
-    if (tree[i].data.user_id !== `user${slim[i][0]}`) {
+    if (tree[i].data.dinoId !== `dino${slim[i][0]}`) {
       return false;
     }
     if (!checkHierarchy(tree[i].children, slim[i][1])) {

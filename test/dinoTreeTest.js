@@ -43,11 +43,11 @@ describe("DinoTree", () => {
     const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
-    const directs = dinoTree.directs("user1");
+    const directs = dinoTree.directs("dino1");
     directs.length.should.be.equal(2);
-    directs[0].user_id.should.be.equal("user3");
-    directs[1].user_id.should.be.equal("user4");
-    const noDirects = dinoTree.directs("user2");
+    directs[0].dinoId.should.be.equal("dino3");
+    directs[1].dinoId.should.be.equal("dino4");
+    const noDirects = dinoTree.directs("dino2");
     noDirects.length.should.be.equal(0);
   });
 
@@ -55,7 +55,7 @@ describe("DinoTree", () => {
     const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
-    const traced = dinoTree.trace("user3");
+    const traced = dinoTree.trace("username3");
     console.log(JSON.stringify(traced));
     traced.trace.should.exist;
     traced.trace.should.be.equal("0-0");
@@ -65,23 +65,23 @@ describe("DinoTree", () => {
     const h = [[1, 0], [2, 1], [4, 2], [3, 2]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
-    const related = dinoTree.related("user2");
+    const related = dinoTree.related("username2");
     related.manager.should.exist;
     related.directs.length.should.be.equal(2);
-    related.manager.user_id.should.be.equal("user1");
-    related.directs[0].user_id.should.be.equal("user3");
-    related.directs[1].user_id.should.be.equal("user4");
+    related.manager.dinoId.should.be.equal("dino1");
+    related.directs[0].dinoId.should.be.equal("dino3");
+    related.directs[1].dinoId.should.be.equal("dino4");
   });
 
   it("directs", () => {
     const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
-    const directs = dinoTree.directs("user1");
+    const directs = dinoTree.directs("dino1");
     directs.length.should.be.equal(2);
-    directs[0].user_id.should.be.equal("user3");
-    directs[1].user_id.should.be.equal("user4");
-    const noDirects = dinoTree.directs("user2");
+    directs[0].dinoId.should.be.equal("dino3");
+    directs[1].dinoId.should.be.equal("dino4");
+    const noDirects = dinoTree.directs("dino2");
     noDirects.length.should.be.equal(0);
   });
 
@@ -89,12 +89,12 @@ describe("DinoTree", () => {
     const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
-    const expanded = dinoTree.expanded("user3");
+    const expanded = dinoTree.expanded("dino3");
     expanded.length.should.be.equal(2);
     expanded[0].children.length.should.be.equal(2);
-    expanded[0].data.user_id.should.be.equal("user1");
-    expanded[1].data.user_id.should.be.equal("user2");
-    expanded[0].children[0].data.user_id.should.be.equal("user3");
-    expanded[0].children[1].data.user_id.should.be.equal("user4");
+    expanded[0].data.dinoId.should.be.equal("dino1");
+    expanded[1].data.dinoId.should.be.equal("dino2");
+    expanded[0].children[0].data.dinoId.should.be.equal("dino3");
+    expanded[0].children[1].data.dinoId.should.be.equal("dino4");
   });
 });
