@@ -9,6 +9,7 @@ function generateProfile(id, manager_id) {
     picture: { value: "url…", metadata },
     fun_title: { value: `Funny ${id}`, metadata },
     location: { value: `city ${id}`, metadata },
+    primary_email: { value: `${id}@mozilla.com`, metadata },
     staff_information: {
       staff: { value: true, metadata },
       title: { value: `Employee Nr: ${id}`, metadata },
