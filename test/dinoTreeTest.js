@@ -23,7 +23,7 @@ describe("DinoTree", () => {
     checkTree(dinoTree.tree, levels).should.be.true;
     const org = [[1, [[3, []]]], [2, []]];
     const fullOrg = dinoTree.fullOrgchart();
-    checkHierarchy(fullOrg, org).should.be.true;
+    checkHierarchy(fullOrg.loose, org).should.be.true;
   });
 
   it("create tree with non-manager dinos", () => {
@@ -36,7 +36,7 @@ describe("DinoTree", () => {
     checkTree(dinoTree.tree, levels).should.be.true;
     const org = [[1, []], [2, []], [3, []]];
     const fullOrg = dinoTree.fullOrgchart();
-    checkHierarchy(fullOrg, org).should.be.true;
+    checkHierarchy(fullOrg.loose, org).should.be.true;
   });
 
   it("directs", () => {
@@ -58,7 +58,7 @@ describe("DinoTree", () => {
     const traced = dinoTree.trace("username3");
     console.log(JSON.stringify(traced));
     traced.trace.should.exist;
-    traced.trace.should.be.equal("0-0");
+    traced.trace.should.be.equal("-1-0-0");
   });
 
   it("related", () => {
