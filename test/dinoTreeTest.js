@@ -68,9 +68,9 @@ describe("DinoTree", () => {
     const related = dinoTree.related("username2");
     related.manager.should.exist;
     related.directs.length.should.be.equal(2);
-    related.manager.dinoId.should.be.equal("dino1");
-    related.directs[0].dinoId.should.be.equal("dino3");
-    related.directs[1].dinoId.should.be.equal("dino4");
+    related.manager.dino_id.should.be.equal("dino1");
+    related.directs[0].dino_id.should.be.equal("dino3");
+    related.directs[1].dino_id.should.be.equal("dino4");
   });
 
   it("directs", () => {
