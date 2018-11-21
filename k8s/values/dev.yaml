@@ -1,4 +1,4 @@
 env: dev
 namespace: dinopark-dev
 elastic_host: elastic-service:9200
-elsitc_index: v2-dino-tree
+elastic_index: v2-dino-tree
