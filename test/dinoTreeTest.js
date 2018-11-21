@@ -23,6 +23,7 @@ describe("DinoTree", () => {
     checkTree(dinoTree.tree, levels).should.be.true;
     const org = [[1, [[3, []]]], [2, []]];
     const fullOrg = dinoTree.fullOrgchart();
+    console.log(JSON.stringify(fullOrg));
     checkHierarchy(fullOrg.loose, org).should.be.true;
   });
 
@@ -45,8 +46,8 @@ describe("DinoTree", () => {
     const dinoTree = new DinoTree(dinos);
     const directs = dinoTree.directs("dino1");
     directs.length.should.be.equal(2);
-    directs[0].dinoId.should.be.equal("dino3");
-    directs[1].dinoId.should.be.equal("dino4");
+    directs[0].dino_id.should.be.equal("dino3");
+    directs[1].dino_id.should.be.equal("dino4");
     const noDirects = dinoTree.directs("dino2");
     noDirects.length.should.be.equal(0);
   });
@@ -68,9 +69,9 @@ describe("DinoTree", () => {
     const related = dinoTree.related("username2");
     related.manager.should.exist;
     related.directs.length.should.be.equal(2);
-    related.manager.dinoId.should.be.equal("dino1");
-    related.directs[0].dinoId.should.be.equal("dino3");
-    related.directs[1].dinoId.should.be.equal("dino4");
+    related.manager.dino_id.should.be.equal("dino1");
+    related.directs[0].dino_id.should.be.equal("dino3");
+    related.directs[1].dino_id.should.be.equal("dino4");
   });
 
   it("directs", () => {
@@ -79,8 +80,8 @@ describe("DinoTree", () => {
     const dinoTree = new DinoTree(dinos);
     const directs = dinoTree.directs("dino1");
     directs.length.should.be.equal(2);
-    directs[0].dinoId.should.be.equal("dino3");
-    directs[1].dinoId.should.be.equal("dino4");
+    directs[0].dino_id.should.be.equal("dino3");
+    directs[1].dino_id.should.be.equal("dino4");
     const noDirects = dinoTree.directs("dino2");
     noDirects.length.should.be.equal(0);
   });
@@ -92,9 +93,9 @@ describe("DinoTree", () => {
     const expanded = dinoTree.expanded("dino3");
     expanded.length.should.be.equal(2);
     expanded[0].children.length.should.be.equal(2);
-    expanded[0].data.dinoId.should.be.equal("dino1");
-    expanded[1].data.dinoId.should.be.equal("dino2");
-    expanded[0].children[0].data.dinoId.should.be.equal("dino3");
-    expanded[0].children[1].data.dinoId.should.be.equal("dino4");
+    expanded[0].data.dino_id.should.be.equal("dino1");
+    expanded[1].data.dino_id.should.be.equal("dino2");
+    expanded[0].children[0].data.dino_id.should.be.equal("dino3");
+    expanded[0].children[1].data.dino_id.should.be.equal("dino4");
   });
 });

@@ -41,7 +41,7 @@ function checkHierarchy(tree, slim) {
     return false;
   }
   for (let i = 0; i < tree.length; i++) {
-    if (tree[i].data.dinoId !== `dino${slim[i][0]}`) {
+    if (tree[i].data.dino_id !== `dino${slim[i][0]}`) {
       return false;
     }
     if (!checkHierarchy(tree[i].children, slim[i][1])) {
