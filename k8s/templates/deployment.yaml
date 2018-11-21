@@ -36,8 +36,6 @@ spec:
               value: "{{ .Values.force_update | default 0 }}"
             - name: ELASTIC_HOST
               value: "{{ .Values.elastic_host }}"
-            - name: ELASTIC_INDEX
-              value: "{{ .Values.elastic_index }}"
             {{ if eq .Values.env "staging" -}}
             - name: AWS_DEFAULT_REGION
               value: "{{ .Values.aws_region }}"
