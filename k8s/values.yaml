@@ -1,3 +1,4 @@
 name: dino-tree
 namespace: dino-park
 rev: latest
+elastic_host: elastic-service:9200
