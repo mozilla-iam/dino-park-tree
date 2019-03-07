@@ -1,9 +1,9 @@
 function generateProfile(id, manager_id) {
   const metadata = { visibility: "staff" };
   return {
+    uuid: { value: `dino${id}`, metadata },
     user_id: { value: `user${id}`, metadata },
-    usernames: { values: { mozilliansorg: `username${id}` }, metadata },
-    identities: { dinopark_id: { value: `dino${id}`, metadata } },
+    primary_username: { value: `username${id}`, metadata },
     first_name: { value: `person ${id}`, metadata },
     last_name: { value: `mc ${id}`, metadata },
     picture: { value: "url…", metadata },
@@ -18,8 +18,8 @@ function generateProfile(id, manager_id) {
     access_information: {
       hris: {
         values: {
-          EmployeeID: id,
-          WorkersManagersEmployeeID: manager_id
+          PrimaryWorkEmail: id,
+          Worker_s_Manager_s_Email_Address: manager_id
         }
       }
     }
