@@ -37,6 +37,7 @@ describe("DinoTree", () => {
     const org = [[1, []], [2, []], [3, []]];
     const fullOrg = dinoTree.fullOrgchart();
     checkHierarchy(fullOrg.loose, org).should.be.true;
+    checkHierarchy(fullOrg.forrest, []).should.be.true;
   });
 
   it("directs", () => {
