@@ -18,8 +18,8 @@ function generateProfile(id, manager_id) {
     access_information: {
       hris: {
         values: {
-          PrimaryWorkEmail: id,
-          Worker_s_Manager_s_Email_Address: manager_id
+          primary_work_email: id,
+          managers_primary_work_email: manager_id
         }
       }
     }
