@@ -2,6 +2,7 @@ function generateProfile(id, manager_id) {
   const metadata = { visibility: "staff" };
   return {
     uuid: { value: `dino${id}`, metadata },
+    active: { value: true, metadata },
     user_id: { value: `user${id}`, metadata },
     primary_username: { value: `username${id}`, metadata },
     first_name: { value: `person ${id}`, metadata },
