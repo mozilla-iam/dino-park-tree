@@ -63,12 +63,27 @@ describe("DinoTree", () => {
   });
 
   it("related", () => {
+    const h = [[1, 0], [2, 1], [4, 2], [3, 2], [5, 1]];
+    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinoTree = new DinoTree(dinos);
+    const related = dinoTree.related("username2");
+    related.manager.should.exist;
+    related.directs.length.should.be.equal(2);
+    related.peers.length.should.be.equal(1);
+    related.manager.dinoId.should.be.equal("dino1");
+    related.directs[0].dinoId.should.be.equal("dino3");
+    related.directs[1].dinoId.should.be.equal("dino4");
+    related.peers[0].dinoId.should.be.equal("dino5");
+  });
+
+  it("related w/o peers", () => {
     const h = [[1, 0], [2, 1], [4, 2], [3, 2]];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const related = dinoTree.related("username2");
     related.manager.should.exist;
     related.directs.length.should.be.equal(2);
+    related.peers.length.should.be.equal(0);
     related.manager.dinoId.should.be.equal("dino1");
     related.directs[0].dinoId.should.be.equal("dino3");
     related.directs[1].dinoId.should.be.equal("dino4");
