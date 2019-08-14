@@ -54,7 +54,7 @@ resource "aws_codebuild_webhook" "webhook" {
 
     filter {
       type    = "HEAD_REF"
-      pattern = "(^/refs/heads/master$|^/refs/tags/.*-(prod|test))"
+      pattern = "(^refs/heads/master$|^refs/tags/.*-(prod|test))"
     }
   }
 }
