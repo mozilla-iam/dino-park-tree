@@ -89,7 +89,10 @@ describe("constructor", () => {
   });
 
   it("bulk", async () => {
-    const profiles = generateProfiles([[1, 0], [2, 1]]);
+    const profiles = generateProfiles([
+      [1, 0],
+      [2, 1]
+    ]);
     const es = makeEs({ refresh: Promise.resolve(true) });
     const storage = new Storage(TEST_CONFIG, es);
     const dinos = await storage.bulkInsert(profiles);
