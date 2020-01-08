@@ -14,34 +14,54 @@ describe("DinoTree", () => {
   });
 
   it("simple tree", () => {
-    const h = [[1, 0], [2, 0], [3, 1]];
+    const h = [
+      [1, 0],
+      [2, 0],
+      [3, 1]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     dinoTree.tree.length.should.be.equal(3);
     dinoTree.id_to_index.size.should.be.equal(3);
     const levels = [1, 2, 3];
     checkTree(dinoTree.tree, levels).should.be.true;
-    const org = [[1, [[3, []]]], [2, []]];
+    const org = [
+      [1, [[3, []]]],
+      [2, []]
+    ];
     const fullOrg = dinoTree.fullOrgchart();
     checkHierarchy(fullOrg.loose, org).should.be.true;
   });
 
   it("create tree with non-manager dinos", () => {
-    const h = [[1, 0], [2, 0], [3, 5]];
+    const h = [
+      [1, 0],
+      [2, 0],
+      [3, 5]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     dinoTree.tree.length.should.be.equal(3);
     dinoTree.id_to_index.size.should.be.equal(3);
     const levels = [1, 2, 3];
     checkTree(dinoTree.tree, levels).should.be.true;
-    const org = [[1, []], [2, []], [3, []]];
+    const org = [
+      [1, []],
+      [2, []],
+      [3, []]
+    ];
     const fullOrg = dinoTree.fullOrgchart();
     checkHierarchy(fullOrg.loose, org).should.be.true;
     checkHierarchy(fullOrg.forrest, []).should.be.true;
   });
 
   it("directs", () => {
-    const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
+    const h = [
+      [1, 0],
+      [2, 0],
+      [4, 1],
+      [3, 1]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const directs = dinoTree.directs("dino1");
@@ -53,7 +73,12 @@ describe("DinoTree", () => {
   });
 
   it("trace", () => {
-    const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
+    const h = [
+      [1, 0],
+      [2, 0],
+      [4, 1],
+      [3, 1]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const traced = dinoTree.trace("username3");
@@ -63,7 +88,13 @@ describe("DinoTree", () => {
   });
 
   it("related", () => {
-    const h = [[1, 0], [2, 1], [4, 2], [3, 2], [5, 1]];
+    const h = [
+      [1, 0],
+      [2, 1],
+      [4, 2],
+      [3, 2],
+      [5, 1]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const related = dinoTree.related("username2");
@@ -77,7 +108,12 @@ describe("DinoTree", () => {
   });
 
   it("related w/o peers", () => {
-    const h = [[1, 0], [2, 1], [4, 2], [3, 2]];
+    const h = [
+      [1, 0],
+      [2, 1],
+      [4, 2],
+      [3, 2]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const related = dinoTree.related("username2");
@@ -90,7 +126,12 @@ describe("DinoTree", () => {
   });
 
   it("directs", () => {
-    const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
+    const h = [
+      [1, 0],
+      [2, 0],
+      [4, 1],
+      [3, 1]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const directs = dinoTree.directs("dino1");
@@ -102,7 +143,12 @@ describe("DinoTree", () => {
   });
 
   it("expanded", () => {
-    const h = [[1, 0], [2, 0], [4, 1], [3, 1]];
+    const h = [
+      [1, 0],
+      [2, 0],
+      [4, 1],
+      [3, 1]
+    ];
     const dinos = generateProfiles(h).map(p => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const expanded = dinoTree.expanded("dino3");
