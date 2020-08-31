@@ -14,7 +14,7 @@ import Storage from "../lib/storage";
 function makeHits(num) {
   return Array.apply(null, { length: num })
     .map(Number.call, Number)
-    .map(i => {
+    .map((i) => {
       return { _source: i };
     });
 }
@@ -33,8 +33,8 @@ function makeEs(how) {
         hits: {
           total: how.total,
           hits: how.searchHits,
-          _scroll_id: scroll && 1
-        }
+          _scroll_id: scroll && 1,
+        },
       };
     }
     async scroll() {
@@ -42,8 +42,8 @@ function makeEs(how) {
         hits: {
           total: how.total,
           hits: how.scrollHits[this.scrollId++] || [],
-          _scroll_id: 1
-        }
+          _scroll_id: 1,
+        },
       };
     }
     async delete() {}
@@ -66,7 +66,7 @@ describe("constructor", () => {
       exists: true,
       total: 130,
       searchHits: hits.splice(0, 50),
-      scrollHits: [hits.splice(0, 50), hits.splice(0, 30)]
+      scrollHits: [hits.splice(0, 50), hits.splice(0, 30)],
     });
     const storage = new Storage(TEST_CONFIG, es);
     const dinos = await storage.getDinos();
@@ -91,7 +91,7 @@ describe("constructor", () => {
   it("bulk", async () => {
     const profiles = generateProfiles([
       [1, 0],
-      [2, 1]
+      [2, 1],
     ]);
     const es = makeEs({ refresh: Promise.resolve(true) });
     const storage = new Storage(TEST_CONFIG, es);

@@ -14,27 +14,27 @@ function generateProfile(id, manager_id) {
     staff_information: {
       staff: { value: true, metadata },
       title: { value: `Employee Nr: ${id}`, metadata },
-      office_location: { value: `office: ${id}`, metadata }
+      office_location: { value: `office: ${id}`, metadata },
     },
     access_information: {
       hris: {
         values: {
           primary_work_email: id,
-          managers_primary_work_email: manager_id
-        }
-      }
-    }
+          managers_primary_work_email: manager_id,
+        },
+      },
+    },
   };
 }
 
 function generateHierarchy(num) {
   return Array.apply(null, { length: num })
     .map(Number.call, Number)
-    .map(i => [i + 1, Math.floor(Math.random() * Math.floor(i + 1))]);
+    .map((i) => [i + 1, Math.floor(Math.random() * Math.floor(i + 1))]);
 }
 
 function generateProfiles(hierarchy) {
-  return hierarchy.map(args => generateProfile(...args));
+  return hierarchy.map((args) => generateProfile(...args));
 }
 
 function checkHierarchy(tree, slim) {
@@ -69,5 +69,5 @@ export {
   generateProfiles,
   generateHierarchy,
   checkTree,
-  checkHierarchy
+  checkHierarchy,
 };

@@ -17,9 +17,9 @@ describe("DinoTree", () => {
     const h = [
       [1, 0],
       [2, 0],
-      [3, 1]
+      [3, 1],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     dinoTree.tree.length.should.be.equal(3);
     dinoTree.id_to_index.size.should.be.equal(3);
@@ -27,7 +27,7 @@ describe("DinoTree", () => {
     checkTree(dinoTree.tree, levels).should.be.true;
     const org = [
       [1, [[3, []]]],
-      [2, []]
+      [2, []],
     ];
     const fullOrg = dinoTree.fullOrgchart();
     checkHierarchy(fullOrg.loose, org).should.be.true;
@@ -37,9 +37,9 @@ describe("DinoTree", () => {
     const h = [
       [1, 0],
       [2, 0],
-      [3, 5]
+      [3, 5],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     dinoTree.tree.length.should.be.equal(3);
     dinoTree.id_to_index.size.should.be.equal(3);
@@ -48,7 +48,7 @@ describe("DinoTree", () => {
     const org = [
       [1, []],
       [2, []],
-      [3, []]
+      [3, []],
     ];
     const fullOrg = dinoTree.fullOrgchart();
     checkHierarchy(fullOrg.loose, org).should.be.true;
@@ -60,9 +60,9 @@ describe("DinoTree", () => {
       [1, 0],
       [2, 0],
       [4, 1],
-      [3, 1]
+      [3, 1],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const directs = dinoTree.directs("dino1");
     directs.length.should.be.equal(2);
@@ -77,9 +77,9 @@ describe("DinoTree", () => {
       [1, 0],
       [2, 0],
       [4, 1],
-      [3, 1]
+      [3, 1],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const traced = dinoTree.trace("username3");
     console.log(JSON.stringify(traced));
@@ -93,9 +93,9 @@ describe("DinoTree", () => {
       [2, 1],
       [4, 2],
       [3, 2],
-      [5, 1]
+      [5, 1],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const related = dinoTree.related("username2");
     related.manager.should.exist;
@@ -112,9 +112,9 @@ describe("DinoTree", () => {
       [1, 0],
       [2, 1],
       [4, 2],
-      [3, 2]
+      [3, 2],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const related = dinoTree.related("username2");
     related.manager.should.exist;
@@ -130,9 +130,9 @@ describe("DinoTree", () => {
       [1, 0],
       [2, 0],
       [4, 1],
-      [3, 1]
+      [3, 1],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const directs = dinoTree.directs("dino1");
     directs.length.should.be.equal(2);
@@ -147,9 +147,9 @@ describe("DinoTree", () => {
       [1, 0],
       [2, 0],
       [4, 1],
-      [3, 1]
+      [3, 1],
     ];
-    const dinos = generateProfiles(h).map(p => new Dino(p));
+    const dinos = generateProfiles(h).map((p) => new Dino(p));
     const dinoTree = new DinoTree(dinos);
     const expanded = dinoTree.expanded("dino3");
     expanded.length.should.be.equal(2);

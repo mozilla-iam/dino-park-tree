@@ -48,22 +48,22 @@ describe("Express handlers", () => {
       ["createExpandedHandler", params, , 200],
       ["createDirectsHandler", params, , 200],
       ["createTraceHandler", params, , 200],
-      ["createFullOrgchartHandler", , , 200]
+      ["createFullOrgchartHandler", , , 200],
     ];
 
     for (const [handler, params, error, status] of handlers) {
       it(`${handler}`, async () => {
         const storage = {
-          getDinos: () => error
+          getDinos: () => error,
         };
         const orgchart = await new Orgchart(storage, DinoTreeMock).init();
         const handle = orgchart[handler]();
         const req = createRequest({ method: "GET", params });
         const res = createResponse({
-          eventEmitter: EventEmitter
+          eventEmitter: EventEmitter,
         });
 
-        const result = new Promise(resolve => {
+        const result = new Promise((resolve) => {
           res.on("end", () => {
             res._isEndCalled().should.be.true;
             res.statusCode.should.be.equal(status);
@@ -79,16 +79,16 @@ describe("Express handlers", () => {
 
     it("createFullOrgchartHandler", async () => {
       const storage = {
-        getDinos: () => error
+        getDinos: () => error,
       };
       const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createFullOrgchartHandler();
       const req = createRequest({ method: "GET" });
       const res = createResponse({
-        eventEmitter: EventEmitter
+        eventEmitter: EventEmitter,
       });
 
-      const result = new Promise(resolve => {
+      const result = new Promise((resolve) => {
         res.on("end", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(200);
@@ -105,29 +105,29 @@ describe("Express handlers", () => {
     it("createBulkHandler", async () => {
       const files = {
         data: {
-          data: "[]"
-        }
+          data: "[]",
+        },
       };
       const storage = {
         getDinos: () => error,
-        bulkInsert: async profiles => {
+        bulkInsert: async (profiles) => {
           profiles.length.should.be.equal(0);
           return DinoTreeMock;
-        }
+        },
       };
       const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createBulkHandler();
       const req = createRequest({ method: "POST", files });
       const res = createResponse({
-        eventEmitter: EventEmitter
+        eventEmitter: EventEmitter,
       });
 
-      const result = new Promise(resolve => {
+      const result = new Promise((resolve) => {
         res.on("end", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(200);
           JSON.parse(res._getData()).should.be.deep.equal({
-            status: "updated"
+            status: "updated",
           });
           resolve();
         });
@@ -141,28 +141,28 @@ describe("Express handlers", () => {
     it("createBulkHandler fails", async () => {
       const files = {
         data: {
-          data: "[]"
-        }
+          data: "[]",
+        },
       };
       const storage = {
         getDinos: () => error,
         bulkInsert: async () => {
           return Promise.reject("FAIL");
-        }
+        },
       };
       const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createBulkHandler();
       const req = createRequest({ method: "POST", files });
       const res = createResponse({
-        eventEmitter: EventEmitter
+        eventEmitter: EventEmitter,
       });
 
-      const result = new Promise(resolve => {
+      const result = new Promise((resolve) => {
         res.on("end", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(503);
           JSON.parse(res._getData()).should.be.deep.equal({
-            error: "FAIL"
+            error: "FAIL",
           });
           resolve();
         });
@@ -177,24 +177,24 @@ describe("Express handlers", () => {
       const body = {};
       const storage = {
         getDinos: () => error,
-        update: async profile => {
+        update: async (profile) => {
           profile.should.be.deep.equal({});
           return DinoTreeMock;
-        }
+        },
       };
       const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createUpdateHandler();
       const req = createRequest({ method: "POST", body });
       const res = createResponse({
-        eventEmitter: EventEmitter
+        eventEmitter: EventEmitter,
       });
 
-      const result = new Promise(resolve => {
+      const result = new Promise((resolve) => {
         res.on("end", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(200);
           JSON.parse(res._getData()).should.be.deep.equal({
-            status: "updated"
+            status: "updated",
           });
           resolve();
         });
@@ -211,21 +211,21 @@ describe("Express handlers", () => {
         getDinos: () => error,
         update: async () => {
           return Promise.reject("FAIL");
-        }
+        },
       };
       const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createUpdateHandler();
       const req = createRequest({ method: "POST", body });
       const res = createResponse({
-        eventEmitter: EventEmitter
+        eventEmitter: EventEmitter,
       });
 
-      const result = new Promise(resolve => {
+      const result = new Promise((resolve) => {
         res.on("end", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(503);
           JSON.parse(res._getData()).should.be.deep.equal({
-            error: "FAIL"
+            error: "FAIL",
           });
           resolve();
         });
@@ -239,27 +239,27 @@ describe("Express handlers", () => {
     it("createDeleteHandler", async () => {
       const storage = {
         getDinos: () => error,
-        deleteDino: async dinoId => {
+        deleteDino: async (dinoId) => {
           dinoId.should.be.equal("dino1");
           return DinoTreeMock;
-        }
+        },
       };
       const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createDeleteHandler();
       const req = createRequest({
         method: "POST",
-        params: { dinoId: "dino1" }
+        params: { dinoId: "dino1" },
       });
       const res = createResponse({
-        eventEmitter: EventEmitter
+        eventEmitter: EventEmitter,
       });
 
-      const result = new Promise(resolve => {
+      const result = new Promise((resolve) => {
         res.on("end", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(200);
           JSON.parse(res._getData()).should.be.deep.equal({
-            status: "deleted"
+            status: "deleted",
           });
           resolve();
         });
@@ -275,24 +275,24 @@ describe("Express handlers", () => {
         getDinos: () => error,
         deleteDino: async () => {
           return Promise.reject("FAIL");
-        }
+        },
       };
       const orgchart = await new Orgchart(storage, DinoTreeMock).init();
       const handle = orgchart.createDeleteHandler();
       const req = createRequest({
         method: "POST",
-        params: { dinoId: "dino1" }
+        params: { dinoId: "dino1" },
       });
       const res = createResponse({
-        eventEmitter: EventEmitter
+        eventEmitter: EventEmitter,
       });
 
-      const result = new Promise(resolve => {
+      const result = new Promise((resolve) => {
         res.on("end", () => {
           res._isEndCalled().should.be.true;
           res.statusCode.should.be.equal(503);
           JSON.parse(res._getData()).should.be.deep.equal({
-            error: "FAIL"
+            error: "FAIL",
           });
           resolve();
         });
