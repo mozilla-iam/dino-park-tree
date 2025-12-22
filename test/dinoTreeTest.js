@@ -5,8 +5,8 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised);
 chai.should();
 
-import { generateProfiles, checkTree, checkHierarchy } from "./helpers";
-import { DinoTree, Dino } from "../lib/dinos";
+import { generateProfiles, checkTree, checkHierarchy } from "./helpers.js";
+import { DinoTree, Dino } from "../lib/dinos.js";
 
 describe("DinoTree", () => {
   it("empty constructor", () => {

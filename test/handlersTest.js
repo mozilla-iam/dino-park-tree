@@ -5,6 +5,8 @@ import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 import { createRequest, createResponse } from "node-mocks-http";
 
+import Orgchart from "../lib/orgchart.js";
+
 chai.use(chaiAsPromised);
 chai.should();
 
@@ -31,8 +33,6 @@ class DinoTreeMock {
     return this._error();
   }
 }
-
-import Orgchart from "../lib/orgchart";
 
 describe("Express handlers", () => {
   describe("Basic endpoints", () => {
