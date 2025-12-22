@@ -1,8 +1,8 @@
-FROM node:14-bullseye-slim
+FROM node:16-bullseye-slim
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --production
+RUN npm install --production --legacy-peer-deps
 COPY . /app
 CMD ["node", "-r", "esm", "index.js"]
