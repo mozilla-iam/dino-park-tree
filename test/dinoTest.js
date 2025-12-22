@@ -5,8 +5,8 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised);
 const should = chai.should();
 
-import { generateProfile } from "./helpers";
-import { Dino } from "../lib/dinos";
+import { generateProfile } from "./helpers.js";
+import { Dino } from "../lib/dinos.js";
 
 describe("Dino", () => {
   it("empty constructor throws", () => {

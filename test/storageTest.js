@@ -7,9 +7,9 @@ import elasticsearch from "elasticsearch";
 chai.use(chaiAsPromised);
 chai.should();
 
-import { TEST_CONFIG } from "./configs";
-import { generateProfile, generateProfiles } from "./helpers";
-import Storage from "../lib/storage";
+import { TEST_CONFIG } from "./configs.js";
+import { generateProfile, generateProfiles } from "./helpers.js";
+import Storage from "../lib/storage.js";
 
 function makeHits(num) {
   return Array.apply(null, { length: num })
