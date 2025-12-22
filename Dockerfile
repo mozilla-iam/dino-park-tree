@@ -5,4 +5,4 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --production --legacy-peer-deps
 COPY . /app
-CMD ["node", "-r", "esm", "index.js"]
+CMD ["node", "index.js"]
