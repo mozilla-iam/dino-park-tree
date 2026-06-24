@@ -22,7 +22,7 @@ describe("Everything configy", () => {
       tmp.file((_, path, fd) =>
         promisify(fs.write)(fd, JSON.stringify(TEST_CONFIG))
           .then(() => load(path) && done())
-          .catch((e) => done(e))
+          .catch((e) => done(e)),
       );
     });
 
@@ -30,7 +30,7 @@ describe("Everything configy", () => {
       tmp.file((_, path, fd) =>
         promisify(fs.write)(fd, JSON.stringify({}))
           .then(() => (() => load(path)).should.throw() && done())
-          .catch((e) => done(e))
+          .catch((e) => done(e)),
       );
     });
 
