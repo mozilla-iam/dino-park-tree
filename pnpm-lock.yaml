@@ -56,7 +56,7 @@ importers:
         version: 6.15.0(eslint@7.32.0)
       eslint-plugin-prettier:
         specifier: ^3.1.4
-        version: 3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.1.2)
+        version: 3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.8.4)
       mocha:
         specifier: ^10.7.3
         version: 10.8.2
@@ -67,8 +67,8 @@ importers:
         specifier: ^1.9.0
         version: 1.17.2
       prettier:
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 3.8.4
+        version: 3.8.4
       sinon:
         specifier: ^9.2.0
         version: 9.2.4
@@ -1317,9 +1317,9 @@ packages:
     resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
     engines: {node: '>=6.0.0'}
 
-  prettier@2.1.2:
-    resolution: {integrity: sha512-16c7K+x4qVlJg9rEbXl7HEGmQyZlG4R9AgP+oHKRMsMsuk8s+ATStlf1NpDqyBI1HpVyfjLOeMhH2LvuNvV5Vg==}
-    engines: {node: '>=10.13.0'}
+  prettier@3.8.4:
+    resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
+    engines: {node: '>=14'}
     hasBin: true
 
   process-on-spawn@1.1.0:
@@ -2326,10 +2326,10 @@ snapshots:
       eslint: 7.32.0
       get-stdin: 6.0.0
 
-  eslint-plugin-prettier@3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.1.2):
+  eslint-plugin-prettier@3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.8.4):
     dependencies:
       eslint: 7.32.0
-      prettier: 2.1.2
+      prettier: 3.8.4
       prettier-linter-helpers: 1.0.1
     optionalDependencies:
       eslint-config-prettier: 6.15.0(eslint@7.32.0)
@@ -3072,7 +3072,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier@2.1.2: {}
+  prettier@3.8.4: {}
 
   process-on-spawn@1.1.0:
     dependencies:
