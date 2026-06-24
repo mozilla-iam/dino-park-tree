@@ -1,6 +1,17 @@
 # dino-tree
 The org chart service for DinoPark
 
+## Hacking
+
+```
+# Ensure pnpm is installed (https://pnpm.io/installation):
+corepack enable pnpm
+# Install the deps:
+pnpm i
+# Run the tests:
+pnpm test
+```
+
 ## Deploying
 
 This application must be manually deployed, until we migrate our builds to
