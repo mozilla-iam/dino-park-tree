@@ -1,8 +1,10 @@
-FROM node:16-bullseye-slim
+FROM node:22-bullseye-slim
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --production --legacy-peer-deps
+COPY pnpm*.yaml ./
+RUN corepack enable pnpm \
+ && pnpm install --prod --frozen-lockfile
 COPY . /app
 CMD ["node", "index.js"]

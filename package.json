@@ -4,7 +4,7 @@
   "description": "The org chart service for DinoPark.",
   "main": "index.js",
   "scripts": {
-    "dev": "node -r esm index.js",
+    "dev": "node index.js",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "mocha -r esm",
     "coverage": "nyc mocha -r esm"
@@ -36,17 +36,27 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
     "mocha": "^10.7.3",
     "mock-fs": "^4.13.0",
     "node-mocks-http": "^1.9.0",
-    "prettier": "2.1.2",
+    "prettier": "3.8.4",
     "sinon": "^9.2.0",
     "tmp": "^0.2.5"
   },
   "directories": {
     "lib": "lib"
-  }
+  },
+  "engines": {
+    "node": ">=22.19.0 <23"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "10"
+    }
+  },
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
 }
