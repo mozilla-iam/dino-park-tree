@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '22'
       - run: corepack enable pnpm
-      - run: pnpm install
+      - run: pnpm install --frozen-lockfile
       - run: pnpm pretest
       - run: pnpm test
       - run: pnpm coverage
