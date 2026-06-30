@@ -42,6 +42,8 @@ spec:
               value: "{{ .Values.elastic_host }}"
             - name: ELASTIC_INDEX
               value: "{{ .Values.elastic_index }}"
+            - name: ORG_TREE_ROOTS
+              value: "{{ .Values.org_tree_roots | default "" }}"
             {{ if eq .Values.env "staging" -}}
             - name: AWS_DEFAULT_REGION
               value: "{{ .Values.aws_region }}"

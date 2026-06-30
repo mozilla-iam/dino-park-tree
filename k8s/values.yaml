@@ -1,3 +1,6 @@
 name: dino-park-tree
 namespace: dino-park
 rev: latest
+# Comma separated list of users who are the root(s) of the org tree(s).
+# See: https://people.mozilla.org/o
+org_tree_roots: ""
